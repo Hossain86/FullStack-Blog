@@ -1,0 +1,10 @@
+.create-container{
+  display: grid;
+  margin: 0px auto;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  max-width: 1200px;
+  background-color: antiquewhite;
+  padding-top: 100px;
+}
