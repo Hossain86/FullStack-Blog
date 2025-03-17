@@ -15,6 +15,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     if (user) {
+      console.log("Logged Successfully");
       //console.log("User data:", user); // Log user data to check if it's fetched correctly
     }
   }, [user]);
