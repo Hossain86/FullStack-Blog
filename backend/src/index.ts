@@ -10,16 +10,13 @@ import User from "./models/Users"; // Import User model
 
 const app = express();
 
+// Use CORS middleware with proper configuration
 app.use(cors({
-  origin: "https://blog-three-kappa-10.vercel.app/" ,
-  methods: ["GET", "POST", "PUT", "DELETE"],  // Allow specific HTTP methods
+  origin: "https://blog-three-kappa-10.vercel.app", // exact match, no trailing slash
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization", "Origin", "X-Requested-With", "Accept"],
+  optionsSuccessStatus: 200  // some legacy browsers choke on 204
 }));
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://blog-three-kappa-10.vercel.app"); // Add your frontend URL here
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  next();
-});
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -30,7 +27,7 @@ app.use("/api/auth", authRoutes);
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI as string)
   .then(() => {
-    console.log("✅ MongoDB Atlash connected successfully");
+    console.log("✅ MongoDB Atlas connected successfully");
   })
   .catch((err) => {
     console.error("❌ Error connecting to database", err);
@@ -49,11 +46,11 @@ const BlogSchema = new mongoose.Schema({
 
 const BlogPost = mongoose.model("BlogPost", BlogSchema);
 
-// Routes
-
-app.get("/", (req,res)=>{
+// Test route
+app.get("/", (req, res) => {
   res.send("Hello World!");
 });
+
 // Fetch all blog posts
 app.get("/api/posts", async (req: Request, res: Response) => {
   try {
