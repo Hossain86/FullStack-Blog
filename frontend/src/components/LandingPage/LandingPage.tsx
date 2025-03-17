@@ -21,26 +21,43 @@ const LandingPage: React.FC = () => {
       <div className={styles.landingSection}>
         <div className={styles.content}>
           <h1 className={styles.gameheader}>
-          Ignite Your Ambition: A Journey to Success and Beyond 🚀
+            Ignite Your Ambition: A Journey to Success and Beyond 🚀
           </h1>
           <p className={styles.gamedetails}>
-          What’s holding you back from your dreams? Some aspirations feel impossible, others seem out of reach, and many get drowned out by the demands of daily life. But here's the truth: the journey to success isn’t about avoiding challenges—it’s about showing up, time and time again, even when motivation starts to waver. In this blog, we’ll dive into:{" "}
-            <br />
+            What’s holding you back from your dreams? Some aspirations feel
+            impossible, others seem out of reach, and many get drowned out by
+            the demands of daily life. But here's the truth: the journey to
+            success isn’t about avoiding challenges—it’s about showing up, time
+            and time again, even when motivation starts to waver. In this blog,
+            we’ll dive into: <br />
             ✅ The science of motivation—how to create unstoppable drive.
-            <br /> ✅ Real-life stories of resilience and success that will inspire you.
+            <br /> ✅ Real-life stories of resilience and success that will
+            inspire you.
             <br />
             ✅ Practical strategies to overcome self-doubt and procrastination.
             <br />
-            ✅ The habits of high achievers and how you can implement them today.
-            <br /><p className="mt-2"><b> Your future self is counting on you—let’s embark on this journey to greatness! 🚀🔥</b></p>
+            ✅ The habits of high achievers and how you can implement them
+            today.
+            <br />
+            <p className="mt-2">
+              <b>
+                {" "}
+                Your future self is counting on you—let’s embark on this journey
+                to greatness! 🚀🔥
+              </b>
+            </p>
           </p>
 
           <div className="d-flex flex-column gap-3">
             <button onClick={() => navigate("/blogs")}>Get Started</button>
 
             {/* ✅ Show "Create New Post" only if user is logged in */}
-            {user && (
-              <button onClick={() => navigate("/create")}>Create New Post</button>
+            {user ? (
+              <button onClick={() => navigate("/create")}>
+                Create New Post
+              </button>
+            ) : (
+              <button onClick={() => navigate("/login")}>Login</button>
             )}
           </div>
         </div>
@@ -52,20 +69,6 @@ const LandingPage: React.FC = () => {
             className={styles.heroImage}
           />
         </div>
-      </div>
-
-      <div className={styles.authSection}>
-        {/* Show login button if user is not logged in */}
-        {user ? (
-          <div className={styles.profileContainer}>
-            
-          </div>
-        ) : (
-          <div className="d-flex flex-column gap-3">
-            <button onClick={() => navigate('/login')}>Login</button>
-            {/* Show register button or other options if needed */}
-          </div>
-        )}
       </div>
     </div>
   );
