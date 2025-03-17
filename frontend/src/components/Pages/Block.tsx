@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./Block.css";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
-interface ArticleData {
+interface ArticleData { 
   id: number;
   heading: string;
   imgsrc: string;
