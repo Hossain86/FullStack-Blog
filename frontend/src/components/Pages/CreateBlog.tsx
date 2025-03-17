@@ -13,6 +13,7 @@ export function CreateBlog() {
   });
 
   const [showModal, setShowModal] = useState(false); // ✅ State for modal visibility
+  const [showModal2, setShowModal2] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -44,7 +45,7 @@ export function CreateBlog() {
       } else {
         const errorResponse = await response.json();
         console.error("Error response:", errorResponse);
-        alert("Failed to post blog.");
+        alert("Failed to post blog. Please go to your profie then Logout first and Login again");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -78,18 +79,25 @@ export function CreateBlog() {
               onChange={handleChange}
               required
             />
+            <p
+              className="mt-2 text-primary"
+              style={{ textDecoration: "underline", cursor: "pointer" }}
+              onClick={() => setShowModal2(true)}
+            >
+              See how to Copy Image Address From Chrome
+            </p>
           </div>
 
           <div className="mb-3">
             <label className="form-label">Details Text:</label>
             <textarea
-              className="form-control"
+              className="form-control small"
               name="details"
               value={formData.details}
               onChange={handleChange}
               required
               rows={5}
-              placeholder="Write your blog details using Markdown..."
+              placeholder="Write your blog details using Markdown.... [ You can just copy text from ChatGPT]"
             ></textarea>
 
             {/* ✅ "See how to write" Link */}
@@ -98,7 +106,7 @@ export function CreateBlog() {
               style={{ textDecoration: "underline", cursor: "pointer" }}
               onClick={() => setShowModal(true)}
             >
-              See how to write MarkDown Text 🥰😎
+              Or See how to write MarkDown Text 🥰😎
             </p>
 
             {/* ✅ Live Markdown Preview */}
@@ -159,7 +167,24 @@ export function CreateBlog() {
       </div>
 
       {/* ✅ Markdown Guide Modal */}
-      {showModal && (
+      {showModal2 && (
+  <div className="modal-overlay">
+    <div className="modal-content">
+      <h5 className="mb-3">How to Copy Image Address in Chrome</h5>
+      <pre className="bg-light p-3 border rounded">
+{`1. Search topic related image in chrome.
+2. Tap the image or Right-click on the image you want to copy the address for.
+3. Click on the "open image in new tab" and open it in new tab.
+4.Copy the tab Address and Phaste it Here.`}
+      </pre>
+      <button className="btn btn-danger mt-3" onClick={() => setShowModal2(false)}>
+        Close
+      </button>
+    </div>
+  </div>
+)}
+
+{showModal && (
         <div className="modal-overlay">
           <div className="modal-content">
             <h5 className="mb-3">Markdown Guide</h5>
@@ -188,6 +213,7 @@ Code block
         </div>
       )}
 
+
       {/* ✅ Modal Styles */}
       <style>
         {`
@@ -207,7 +233,7 @@ Code block
             background: white;
             padding: 20px;
             border-radius: 8px;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
           }
         `}
