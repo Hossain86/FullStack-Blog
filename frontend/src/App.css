@@ -3,6 +3,8 @@
 .app-container{
   font-family: 'Roboto', sans-serif;
   transition: transform 0.3s ease-in-out;
+  margin: 0px;
+  padding: 0px;
 }
 .logo {
   height: 6em;
@@ -35,11 +37,9 @@
 }
 
 
-button{
+button {
   background-image: linear-gradient(to right, #ff5733 0%, #ff5733 51%, #EC6F66 100%);
-  margin: 0px;
-  padding: 6px 5px;
-  width: 120px;
+  padding: 6px 10px; /* Adjust padding for better spacing */
   text-align: center;
   font-size: min(12px, 14px);
   transition: 0.5s;
@@ -47,11 +47,31 @@ button{
   color: #fff;
   box-shadow: 0 0 10px #eee;
   border-radius: 8px;
-  border: none; /* No border */
-  cursor: pointer; /* Makes the button clickable */
+  border: none;
+  cursor: pointer;
+
+  /* ✅ Full compatibility for button width */
+  display: inline-block;
+  width: auto;
+  min-width: -webkit-fit-content; /* ✅ For Samsung Internet */
+  min-width: fit-content; /* ✅ Standard support */
+  max-width: 150px; 
+  white-space: nowrap; /* Prevents multi-line text */
 }
-button:hover{
+
+button:hover {
   background-position: right center;
   color: #ccc;
   text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  button {
+    background-image: linear-gradient(to right, #ff5733 0%, #ff5733 51%, #EC6F66 100%);
+    padding: 5px 6px; /* Adjust padding for better spacing */
+    text-align: center;
+    font-size: min(11px, 14px);
+    box-shadow: 0 0 10px #eee;
+    border-radius: 5px;
+  }
 }

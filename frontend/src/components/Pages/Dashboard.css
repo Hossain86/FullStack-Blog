@@ -1,0 +1,13 @@
+.dashboard-container{
+  display: grid;
+  margin-top: 100px;
+  align-items: center;
+  justify-items: center;
+  text-align: center;
+}
+.profilePic{
+  width: 70px;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}

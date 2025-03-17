@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaStar, FaRegStar } from "react-icons/fa";
 import "./BlogDetails.css"; // Optional: create this file for styling
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm';
 
 interface Blog {
   id: number;
@@ -46,7 +48,10 @@ function BlogDetails({ blogs }: Props) {
       <img src={game.imgsrc} alt={game.heading} className="blog-img" />
       <h2 className="blog-header">{game.heading}</h2>
 
-      <p className="blog-details">{game.details}</p>
+      <div className="blog-details">
+      <ReactMarkdown children={game.details} remarkPlugins={[remarkGfm]} />
+
+      </div>
 
       {/* Extended Blog Information */}
       <div className="extended-info">

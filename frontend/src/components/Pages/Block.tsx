@@ -2,6 +2,7 @@ import { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./Block.css";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
+import ReactMarkdown from "react-markdown";
 
 interface ArticleData {
   id: number;
@@ -47,21 +48,24 @@ function Block({ blogs }: Props) {
       {blogs.slice().reverse().map((article) => (
         <div key={article.id} className="block-container">
           <div className="block-image">
-            <img src={article.imgsrc} alt={article.heading} className="block-img" />
+            <img src={article.imgsrc} alt={article.heading} className="block-img"  onClick={() => navigate(`/blog/${article.id}`)} />
           </div>
           <div className="block-texts">
             <h2 className="block-header" onClick={() => navigate(`/blog/${article.id}`)}>{article.heading}</h2>
-            <p className="block-details">{article.details.substring(0, 150) + "..."}</p>
-            <p><strong>Category:</strong> {article.category}</p>
-            {/* <p><strong>Date:</strong> {article.date_created}</p> */}
-            <p><strong>Author:</strong> {article.author}</p>
+            <p className="block-details">  {article.details.substring(0, 150) + "..."}</p>
+            {/* <div className="cat-dat" > </div>
+              <p><strong>Category:</strong> {article.category}</p> */}
+              <p className="block-date"><strong>Date:</strong> {article.date_created}</p>
+            
+            <p className="block-author"><strong>Author:</strong> {article.author}</p>
 
             
-            <button className="ctaButton" onClick={() => navigate(`/blog/${article.id}`)}>
-              Show More
-            </button>
+            
 
             <div className="block-lower">
+              <button className="ctaButton" onClick={() => navigate(`/blog/${article.id}`)}>
+              Show More
+            </button>
               <span onClick={() => toggleLike(article.id)} style={{ cursor: "pointer" }}>
                 {likedArticles[article.id] ? <AiFillHeart color="red" size={22} /> : <AiOutlineHeart size={22} />}
               </span>

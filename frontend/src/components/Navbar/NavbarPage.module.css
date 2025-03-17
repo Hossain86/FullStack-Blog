@@ -49,7 +49,14 @@ body {
 .navLinks a:hover {
   color: #007bff;
 }
-
+.profilePic{
+  width: 35px;
+  height: auto;
+  border-radius: 50%;
+  margin: 0px;
+  cursor: pointer;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
 /* Dark Mode Toggle Button */
 .dark-mode-toggle {
   background-color: var(--button-bg);
@@ -73,6 +80,49 @@ body {
   font-size: 1.8rem;
   cursor: pointer;
   color: var(--text-color);
+}
+/* Categories Button */
+.categoriesButton {
+  position: relative;
+}
+
+.categoryBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  color: #000;
+}
+
+/* Categories Dropdown - Initially hidden */
+.categoriesDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 200px;
+  display: none;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+  padding: 0;
+}
+
+.categoriesButton:hover .categoriesDropdown {
+  display: block; /* Show dropdown on hover */
+}
+
+.categoriesDropdown a {
+  display: block;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: black;
+}
+
+.categoriesDropdown a:hover {
+  background-color: #f0f0f0;
 }
 
 /* Responsive Styles for Mobile */

@@ -1,7 +1,7 @@
 .block {
   display: inline-block;
   justify-content: center;
-  margin-top: 50px;
+  margin-top: 70px;
 }
 
 .block-container {
@@ -20,6 +20,7 @@
   flex: 0.4;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .block-img {
@@ -29,7 +30,7 @@
 
 .block-texts {
   flex: 1.5;
-  padding: 0px 20px;
+  padding: 10px 10px 10px 10px;
   width: 100%;
   text-align: justify;
 }
@@ -54,9 +55,15 @@
 
 .block-lower {
   display: flex;
-  justify-content: center;
+  justify-content:space-between;
   align-items: center;
   margin-top: 0px;
+}
+.cat-dat{
+  display: flex;
+  justify-content:space-between;
+  margin: 0px;
+  padding: 0px;
 }
 .ctabutton{
   background-color: #007bff;
@@ -94,10 +101,13 @@
 }
 
 @media (max-width: 550px) {
+  .block{
+    margin-top: 60px;
+  }
   .block-container {
     flex-direction: column;
     margin: 20px 10px;
-    max-width: 90%;
+    max-width: 100%;
   }
 
   .block-img {
@@ -106,7 +116,7 @@
   }
 
   .block-texts {
-    padding: 0 5px;
+    padding: 0px 5px 10px 5px;
   }
 
   .block-header {
@@ -119,5 +129,8 @@
     padding-right: 8px;
     font-size: 0.6rem;
     margin: 5px 0;
+  }
+  .block-date{
+    display: none;
   }
 }

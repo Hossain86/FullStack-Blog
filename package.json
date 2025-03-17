@@ -3,10 +3,14 @@
     "dev": "concurrently \"npm --prefix backend run dev\" \"wait-on http://localhost:5173 && npm --prefix frontend run dev\""
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.9",
     "concurrently": "^9.1.2",
     "wait-on": "^8.0.3"
   },
   "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "cors": "^2.8.5",
     "react-icons": "^5.5.0"
   }
 }

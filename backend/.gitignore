@@ -1,1 +1,12 @@
+# Ignore environment files
+.env
+
+# Ignore node_modules
 node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore TypeScript build outputs (if applicable)
+dist/
+build/
