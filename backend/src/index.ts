@@ -11,9 +11,15 @@ import User from "./models/Users"; // Import User model
 const app = express();
 
 app.use(cors({
-  origin: [ "https://blog-three-kappa-10.vercel.app/" ,"http://localhost:5174" ], // Allow requests from frontend
+  origin: "https://blog-three-kappa-10.vercel.app/" ,
   methods: ["GET", "POST", "PUT", "DELETE"],  // Allow specific HTTP methods
 }));
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://blog-three-kappa-10.vercel.app"); // Add your frontend URL here
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  next();
+});
 
 // Middleware to parse JSON
 app.use(express.json());
