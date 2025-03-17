@@ -35,7 +35,7 @@ mongoose.connect(process.env.MONGO_URI as string)
   });
 
 // Blog Post Schema and Model
-const BlogSchema = new mongoose.Schema({
+const BlogSchema = new mongoose.Schema({ 
   id: { type: Number, required: true },
   heading: { type: String, required: true },
   imgsrc: { type: String, required: true },
