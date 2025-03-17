@@ -134,6 +134,10 @@
     font-size: 0.7rem;
     margin: 5px 0;
   }
+  .block-lower{
+    padding-right: 8px;
+    padding-left: 8px;
+  }
   .block-date{
     display: none;
   }
