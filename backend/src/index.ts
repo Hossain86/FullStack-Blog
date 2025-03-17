@@ -11,7 +11,7 @@ import User from "./models/Users"; // Import User model
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173",  // Allow requests from frontend
+  origin: "http://localhost:5174",  // Allow requests from frontend
   methods: ["GET", "POST", "PUT", "DELETE"],  // Allow specific HTTP methods
 }));
 
@@ -22,9 +22,9 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI || "mongodb://localhost/blogDatabase")
+mongoose.connect(process.env.MONGO_URI as string)
   .then(() => {
-    console.log("✅ MongoDB connected successfully");
+    console.log("✅ MongoDB Atlash connected successfully");
   })
   .catch((err) => {
     console.error("❌ Error connecting to database", err);
