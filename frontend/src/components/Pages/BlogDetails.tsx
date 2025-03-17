@@ -49,7 +49,7 @@ function BlogDetails({ blogs }: Props) {
       <button onClick={() => navigate(-1)} className="back-button">
         ⬅ Back
       </button>
-
+<p className="text-danger" style={{ fontSize: "12px" }}>Please don't reload the page!! Otherwise the page will be gone 🙃. Go back and enter again if u face error </p>
       <img src={game.imgsrc} alt={game.heading} className="blog-img" />
       <h2 className="blog-header">{game.heading}</h2>
 
