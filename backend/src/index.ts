@@ -15,7 +15,8 @@ app.use(cors({
   origin: "https://blog-three-kappa-10.vercel.app", // exact match, no trailing slash
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization", "Origin", "X-Requested-With", "Accept"],
-  optionsSuccessStatus: 200  // some legacy browsers choke on 204
+  optionsSuccessStatus: 200,  // some legacy browsers choke on 204
+  credentials:true
 }));
 
 // Middleware to parse JSON
