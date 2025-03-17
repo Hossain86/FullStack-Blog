@@ -34,7 +34,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       // If a token exists but no user data, fetch user details
       const fetchUserData = async () => {
         try {
-          const response = await fetch("http://localhost:3000/api/auth/me", {
+          const response = await fetch("https://full-stack-blog-api.vercel.app/api/auth/me", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

@@ -45,6 +45,9 @@ const BlogPost = mongoose.model("BlogPost", BlogSchema);
 
 // Routes
 
+app.get("/", (req,res)=>{
+  res.send("Hello World!");
+});
 // Fetch all blog posts
 app.get("/api/posts", async (req: Request, res: Response) => {
   try {
