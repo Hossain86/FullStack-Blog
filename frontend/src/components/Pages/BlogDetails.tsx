@@ -4,6 +4,7 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 import "./BlogDetails.css"; // Optional: create this file for styling
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm';
+import axios from "axios";
 
 interface Blog {
   id: number;
@@ -18,24 +19,43 @@ interface Blog {
 interface Props {
   blogs: Blog[];
 }
+const API_URL = "https://full-stack-blog-api.vercel.app/api/posts";
 
 function BlogDetails({ blogs }: Props) {
   const { id } = useParams();
   const navigate = useNavigate();
+  const [, setBlog] = useState<Blog | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+
+    // Check if the blog is available in the passed props
+    let foundBlog = blogs.find((b) => b.id === Number(id));
+
+    if (foundBlog) {
+      setBlog(foundBlog);
+      setLoading(false);
+    } else {
+      // Fetch the blog from the API if not found in the props
+      axios
+        .get(`${API_URL}/${id}`)
+        .then((response) => {
+          setBlog(response.data);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Error fetching blog:", err);
+          setError("Blog not found!");
+          setLoading(false);
+        });
+    }
+  }, [id, blogs]);
   
   // Find the selected game using the id from the URL
   const game = blogs.find((g) => g.id === Number(id));
-
-  // Rating state (0 to 5)
   const [rating, setRating] = useState<number>(0);
-  // 🆕 Scroll to top when the component mounts
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   
   if (!game) return <h2>Blog not found!</h2>;
   useEffect(() => {
@@ -43,7 +63,8 @@ function BlogDetails({ blogs }: Props) {
       document.title = game.heading; // Set the document title to the blog heading
     }
   }, [game]);
-  
+  if (loading) return <h2>Loading...</h2>;
+  if (error) return <h2 className="error">{error}</h2>;
   return (
     <div className="blog-container">
       <button onClick={() => navigate(-1)} className="back-button">
