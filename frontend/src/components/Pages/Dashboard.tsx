@@ -38,19 +38,30 @@ const Dashboard: React.FC = () => {
       {/* {error && <p className="text-danger">{error}</p>} */}
       {user ? (
         <div>
-          <img
-              src={user.profilePic || 'https://static.vecteezy.com/system/resources/thumbnails/018/742/015/small_2x/minimal-profile-account-symbol-user-interface-theme-3d-icon-rendering-illustration-isolated-in-transparent-background-png.png'}
-              alt="Profile"
-              className="profilePic"
-            />
-          <h3>Welcome, {user.username}</h3>
-          <h4>You are successfully Logged in</h4>
-          <h6>Now you can create any post</h6>
-          <p>Your Email: {user.email}</p>
-          <button onClick={handleLogout} className="btn btn-danger">
-            Logout
-          </button>
-        </div>
+        <img
+          src={
+            user.profilePic ||
+            'https://static.vecteezy.com/system/resources/thumbnails/018/742/015/small_2x/minimal-profile-account-symbol-user-interface-theme-3d-icon-rendering-illustration-isolated-in-transparent-background-png.png'
+          }
+          alt="Profile"
+          className="profilePic"
+        />
+        <h3>Welcome, {user.username}</h3>
+        <h4>You are successfully Logged in</h4>
+        <h6>Now you can create any post</h6>
+        <p>Your Email: {user.email}</p>
+        <button onClick={handleLogout} className="btn btn-danger">
+          Logout
+        </button>
+        <p className="mt-3 text-muted">
+          <strong>User Guide:</strong> If you encounter any errors or loading issues, try the following steps:
+          <ol className="mt-2">
+            <li>Close the website and open it again.</li>
+            <li>If the issue persists, log out, close the website, and then re-enter and log in again.</li>
+          </ol>
+        </p>
+      </div>
+      
       ) : (
         <p>Loading user data...For quick reload just Refresh the page after 5-10 seconds 😀</p>
       )}
