@@ -7,7 +7,7 @@ import { AuthenticatedRequest } from "../@types/express";
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key";
-console.log("JWT_SECRET:", process.env.JWT_SECRET);
+//console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
 
 // **User Registration**

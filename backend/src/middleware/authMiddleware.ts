@@ -14,9 +14,9 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction):
     const secretKey = process.env.JWT_SECRET || "your_secret_key"; // Securely store this in .env
     const decoded = jwt.verify(token.replace("Bearer ", ""), secretKey);
     
-    console.log("Raw Token Header:", req.header("Authorization"));
-    console.log("Extracted Token:", token.replace("Bearer ", ""));
-    console.log("Decoded User:", decoded);
+    // console.log("Raw Token Header:", req.header("Authorization"));
+    // console.log("Extracted Token:", token.replace("Bearer ", ""));
+    // console.log("Decoded User:", decoded);
 
 
     // Attach user info to request object
