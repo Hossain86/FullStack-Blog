@@ -51,7 +51,7 @@ const Dashboard: React.FC = () => {
           </button>
         </div>
       ) : (
-        <p>Loading user data...For quick reload just Refresh the page 😀</p>
+        <p>Loading user data...For quick reload just Refresh the page after 5-10 seconds 😀</p>
       )}
     </div>
   );

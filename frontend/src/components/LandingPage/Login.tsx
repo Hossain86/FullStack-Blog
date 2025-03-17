@@ -90,6 +90,7 @@ const Login: React.FC = () => {
               Sign up here
             </a>
           </p>
+          <p>For Demo Login Use Email: test@example.com and password:123456</p>
         </div>
       </div>
     </div>
