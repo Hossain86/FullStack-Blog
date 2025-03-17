@@ -1,6 +1,7 @@
 .LandingPageContainer{
   padding:min(50px, 5vw) ;
-  margin-top: 70px;
+  margin-top: 60px;
+  margin-bottom: 50px;
 }
 .landingSection {
   top: 0;
@@ -16,6 +17,8 @@
 }
 .content {
   flex: 1.2;
+  padding: 0px;
+  margin: 0px;
 }
 
 .content h1 {
@@ -35,18 +38,11 @@
   flex: 1;
   text-align: center;
 }
-.ctabutton{
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 5px;
-  margin: 5px;
-  cursor: pointer;
-  transition: border-color 0.25s;
+.gamedetails{
+  width: 100%;
 }
 .heroImage {
-  max-width: 90%;
+  max-width: 80%;
   height: auto;
   border-radius: 8px;
 }
@@ -77,22 +73,22 @@
 }
 @media (max-width: 550px){
   .LandingPageContainer{
-    padding: min(10px, 2vw) ;
-    margin-top: 60px;
+    padding: min(0px, 0vw) ;
+    margin-top: 50px;
   }
   .landingSection {
     margin: 30px 0px 0px 0px;
     flex-direction: column-reverse;
-    padding: 0px;
+    padding: 0rem;
   }
   .content h1{
     font-size: 1rem;
   }
   .content p{
-    font-size: 0.9rem;
+    font-size: 0.8rem;
   }
   .content,
   .imageContainer {
-    width: 80%;
+    width: 90%;
   }
 }

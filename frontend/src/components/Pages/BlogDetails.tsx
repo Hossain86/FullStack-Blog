@@ -38,7 +38,12 @@ function BlogDetails({ blogs }: Props) {
   }, []);
   
   if (!game) return <h2>Blog not found!</h2>;
-
+  useEffect(() => {
+    if (game) {
+      document.title = game.heading; // Set the document title to the blog heading
+    }
+  }, [game]);
+  
   return (
     <div className="blog-container">
       <button onClick={() => navigate(-1)} className="back-button">

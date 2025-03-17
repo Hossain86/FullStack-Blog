@@ -111,18 +111,20 @@
   }
 
   .block-img {
-    width:60%;
+    max-width:65%;
     margin: 10px 0px;
   }
 
   .block-texts {
     padding: 0px 5px 10px 5px;
+    line-height: 1.8;
   }
 
   .block-header {
     padding-right: 8px;
     font-size: 0.9rem;
     margin: 10px 0;
+    line-height: 1.5;
   }
 
   .block-texts p {

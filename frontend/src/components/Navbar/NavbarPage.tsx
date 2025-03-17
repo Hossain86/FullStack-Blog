@@ -16,7 +16,7 @@ const NavbarPage: React.FC<NavbarPageProps> = ({ setCategory }) => {
   if (!authContext) {
     return <p>Error: AuthContext is not available.</p>;
   }
-  const { user, loading } = authContext; // Destructure values from context
+  const { user,  } = authContext; // Destructure values from context
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 

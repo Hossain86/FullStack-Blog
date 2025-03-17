@@ -21,12 +21,10 @@ const LandingPage: React.FC = () => {
       <div className={styles.landingSection}>
         <div className={styles.content}>
           <h1 className={styles.gameheader}>
-            Unleash Your Potential: The Power of Relentless Motivation 🚀
+          Ignite Your Ambition: A Journey to Success and Beyond 🚀
           </h1>
           <p className={styles.gamedetails}>
-            Are You Ready to Break Barriers and Achieve More? We all have dreams.
-            Some seem impossible, some feel too distant, and some get lost in the noise of everyday life.
-            The decision to keep pushing forward, even when motivation fades. In this blog, we’ll dive into:{" "}
+          What’s holding you back from your dreams? Some aspirations feel impossible, others seem out of reach, and many get drowned out by the demands of daily life. But here's the truth: the journey to success isn’t about avoiding challenges—it’s about showing up, time and time again, even when motivation starts to waver. In this blog, we’ll dive into:{" "}
             <br />
             ✅ The science of motivation—how to create unstoppable drive.
             <br /> ✅ Real-life stories of resilience and success that will inspire you.
@@ -34,7 +32,7 @@ const LandingPage: React.FC = () => {
             ✅ Practical strategies to overcome self-doubt and procrastination.
             <br />
             ✅ The habits of high achievers and how you can implement them today.
-            <br /> Let’s begin this journey together! 🚀🔥
+            <br /><p className="mt-2"><b> Your future self is counting on you—let’s embark on this journey to greatness! 🚀🔥</b></p>
           </p>
 
           <div className="d-flex flex-column gap-3">
@@ -49,7 +47,7 @@ const LandingPage: React.FC = () => {
 
         <div className={styles.imageContainer}>
           <img
-            src="https://www.univariety.com/blog/wp-content/uploads/2014/08/motivational-goals.jpg"
+            src="https://img.pikbest.com/png-images/20240922/poster-t-shirt-with-the-words-never-you-give-up_10872804.png!w700wp"
             alt="Motivation Preview"
             className={styles.heroImage}
           />

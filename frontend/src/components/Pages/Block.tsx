@@ -2,7 +2,6 @@ import { useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "./Block.css";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
-import ReactMarkdown from "react-markdown";
 
 interface ArticleData {
   id: number;
