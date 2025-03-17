@@ -122,6 +122,7 @@
 
   .block-header {
     padding-right: 8px;
+    padding-left: 8px;
     font-size: 0.9rem;
     margin: 10px 0;
     line-height: 1.5;
@@ -129,8 +130,13 @@
 
   .block-texts p {
     padding-right: 8px;
-    font-size: 0.6rem;
+    padding-left: 8px;
+    font-size: 0.7rem;
     margin: 5px 0;
+  }
+  .block-lower{
+    padding-right: 8px;
+    padding-left: 8px;
   }
   .block-date{
     display: none;
