@@ -10,6 +10,7 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "react-icons": "^5.5.0"
   }
