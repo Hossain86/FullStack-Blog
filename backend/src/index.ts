@@ -44,7 +44,7 @@ const BlogSchema = new mongoose.Schema({
   date_created: { type: Date, default: Date.now },
   author: { type: String, required: true },
 });
-
+BlogSchema.index({ id: 1 });
 const BlogPost = mongoose.model("BlogPost", BlogSchema);
 
 // Test route
