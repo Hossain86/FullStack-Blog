@@ -55,7 +55,7 @@ app.get("/", (req, res) => {
 // Fetch all blog posts
 app.get("/api/posts", async (req: Request, res: Response) => {
   try {
-    const posts = await BlogPost.find().sort({id: -1});
+    const posts = await BlogPost.find().sort({id:1});
     res.json(posts);
   } catch (error) {
     res.status(500).json({ message: "Error fetching posts", error });
