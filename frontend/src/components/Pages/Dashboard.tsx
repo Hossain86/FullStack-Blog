@@ -55,7 +55,13 @@ const Dashboard: React.FC = () => {
           />
           <h3>Welcome, {user.username}</h3>
           <h4>You are successfully Logged in</h4>
-          <h6>Now you can create any post</h6>
+          <h6>Now you can create any post <p
+              className="text-primary"
+              style={{ textDecoration: "underline", cursor: "pointer" }}
+              onClick={() => navigate(`/create`)}
+            >
+              Click Here To Post
+            </p></h6>
           <p>Your Email: {user.email}</p>
           <button onClick={handleLogout} className="btn btn-danger">
             Logout
@@ -70,7 +76,7 @@ const Dashboard: React.FC = () => {
 
         </div>
       ) : (
-        <p className="error-text">Session expired. Please log in again.</p>
+        <p className="error-text">Please Refresh The Browser or Log in again.</p>
       )}
     </div>
   );

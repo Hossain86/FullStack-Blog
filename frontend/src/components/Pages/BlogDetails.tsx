@@ -4,6 +4,7 @@ import { FaStar, FaRegStar } from "react-icons/fa";
 import "./BlogDetails.css"; // Optional: create this file for styling
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm';
+import rehypeRaw from "rehype-raw"; 
 import axios from "axios";
 
 interface Blog {
@@ -75,7 +76,11 @@ function BlogDetails({ blogs }: Props) {
       <h2 className="blog-header">{game.heading}</h2>
 
       <div className="blog-details">
-      <ReactMarkdown children={game.details} remarkPlugins={[remarkGfm]} />
+      <ReactMarkdown 
+        children={game.details} 
+        remarkPlugins={[remarkGfm]} 
+        rehypePlugins={[rehypeRaw]} // ✅ Enable HTML parsing
+      />
 
       </div>
 
