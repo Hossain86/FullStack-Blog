@@ -40,8 +40,8 @@
   @media (max-width: 650px) {
     .blog-container{
       margin: 25px 0px;
-      width: 95%;
-      padding: 45px 10px;
+      width: 100%;
+      padding: 45px 15px;
     }
     .blog-header{
       font-size: 1.2rem;
