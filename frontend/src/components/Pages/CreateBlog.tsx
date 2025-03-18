@@ -21,16 +21,16 @@ export function CreateBlog() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
-    let token = localStorage.getItem("token");
-  
+
+    const token = localStorage.getItem("token");
+
     if (!token) {
       alert("No authentication token found. Please log in first.");
       return;
     }
-  
+
     try {
-      let response = await fetch("https://full-stack-blog-api.vercel.app/api/createblog", {
+      const response = await fetch("https://full-stack-blog-api.vercel.app/api/createblog", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,48 +38,19 @@ export function CreateBlog() {
         },
         body: JSON.stringify(formData),
       });
-  
-      if (response.status === 403) {
-        // ❌ Token expired → Try refreshing token
-        const refreshResponse = await fetch("https://full-stack-blog-api.vercel.app/api/refresh-token", {
-          method: "POST",
-          credentials: "include",
-        });
-  
-        if (refreshResponse.ok) {
-          const refreshData = await refreshResponse.json();
-          localStorage.setItem("token", refreshData.accessToken); // ✅ Store new token
-          token = refreshData.accessToken;
-  
-          // 🔁 Retry the request with new token
-          response = await fetch("https://full-stack-blog-api.vercel.app/api/createblog", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify(formData),
-          });
-        } else {
-          alert("Session expired. Please log in again.");
-          localStorage.removeItem("token");
-          return;
-        }
-      }
-  
+
       if (response.ok) {
         alert("Blog posted successfully!");
         setFormData({ heading: "", imgsrc: "", details: "", category: "", author: "" });
       } else {
         const errorResponse = await response.json();
-        alert(errorResponse.message || "Failed to post blog.");
+        console.error("Error response:", errorResponse);
+        alert("Failed to post blog. Please go to your profie then Logout first and Login again");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Something went wrong.");
     }
   };
-  
 
   return (
     <div className="create-container container">

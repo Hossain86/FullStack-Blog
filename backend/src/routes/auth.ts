@@ -1,91 +1,96 @@
-import express, { Request, Response } from "express";
+import express, {Request, Response} from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import User from "../models/Users";
+import  User  from "../models/Users";
 import { authMiddleware } from "../middleware/authMiddleware";
 import { AuthenticatedRequest } from "../@types/express";
-import cookieParser from "cookie-parser";  // ✅ Required for cookies
-import RefreshTokenModel from "../models/RefreshToken"; // ✅ Store refresh tokens
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key";
+//console.log("JWT_SECRET:", process.env.JWT_SECRET);
 
-router.use(cookieParser()); // ✅ Add middleware
 
-// **User Login with Refresh Token**
-router.post("/login", async (req: Request, res: Response): Promise<any> => {
+// **User Registration**
+router.post("/register", async (req: Request, res: Response): Promise<any> => {
+  try {
+    const { username, email, password } = req.body;
+
+    // ✅ Check if all fields exist
+    if (!username || !email || !password) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    // ✅ Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "User already exists" });
+    }
+
+    // ✅ Ensure username is unique
+    const existingUsername = await User.findOne({ username });
+    if (existingUsername) {
+      return res.status(400).json({ message: "Username already taken" });
+    }
+
+    // ✅ Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // ✅ Save user
+    const newUser = new User({ username, email, password: hashedPassword });
+    await newUser.save();
+
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (err) {
+    console.error(err); // ✅ Log error to check details
+    res.status(500).json({ message: "Server error", error: err });
+  }
+});
+
+
+// **User Login**
+router.post("/login", async(req: Request, res: Response): Promise<any> => {
   try {
     const { email, password } = req.body;
 
     // Check if user exists
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+    if (!user) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
 
     // Compare password
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid credentials" });
+    }
 
-    // ✅ Generate Access & Refresh Tokens
-    const accessToken = jwt.sign({ userId: user._id, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
-    const refreshToken = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: "7d" });
+    // Generate JWT
+    const token = jwt.sign({ userId: user._id, email: user.email }, JWT_SECRET, { expiresIn: "1h" });
 
-    // ✅ Save Refresh Token to DB
-    await RefreshTokenModel.create({ userId: user._id, token: refreshToken });
 
-    // ✅ Store Refresh Token in Cookie
-    res.cookie("refreshToken", refreshToken, {
-      httpOnly: true,
-      secure: false, // 🔹 Use 'true' in production with HTTPS
-      sameSite: "strict",
-    });
-
-    res.json({ accessToken, user: { id: user._id, username: user.username, email: user.email } });
-
+    res.json({ token, user: { id: user._id, username: user.username, email: user.email } });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err });
   }
 });
 
-// **Refresh Token Endpoint**
-router.post("/refresh-token", async (req: Request, res: Response) : Promise<any>=> {
+router.get("/me", authMiddleware, async (req: AuthenticatedRequest, res: Response): Promise<any> => {
   try {
-    const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken) return res.status(403).json({ message: "Refresh token missing" });
+    if (!req.user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
 
-    // ✅ Check if the refresh token exists in the database
-    const storedToken = await RefreshTokenModel.findOne({ token: refreshToken });
-    if (!storedToken) return res.status(403).json({ message: "Invalid refresh token" });
+    const user = await User.findOne({ email: req.user.email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found." });
+    }
 
-    jwt.verify(refreshToken, JWT_SECRET, async (err: any, decoded: any) => {
-      if (err) return res.status(403).json({ message: "Invalid refresh token" });
-
-      const newAccessToken = jwt.sign({ userId: decoded.userId }, JWT_SECRET, { expiresIn: "1h" });
-
-      res.json({ accessToken: newAccessToken });
-    });
-
-  } catch (err) {
-    res.status(500).json({ message: "Server error", error: err });
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: "Server error." });
   }
 });
 
-// **Logout Endpoint**
-router.post("/logout", async (req: Request, res: Response): Promise<any> => {
-  try {
-    const refreshToken = req.cookies.refreshToken;
-    if (!refreshToken) return res.status(400).json({ message: "No refresh token provided" });
-
-    // ✅ Delete refresh token from DB
-    await RefreshTokenModel.deleteOne({ token: refreshToken });
-
-    // ✅ Clear cookie
-    res.clearCookie("refreshToken");
-
-    res.json({ message: "Logged out successfully" });
-
-  } catch (err) {
-    res.status(500).json({ message: "Server error", error: err });
-  }
-});
+// Example of /api/auth/me endpoint in Express.js
 
 export default router;

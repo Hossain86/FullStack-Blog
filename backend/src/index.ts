@@ -3,15 +3,13 @@ dotenv.config();
 import express, { Request, Response } from "express";
 import cors from "cors";
 import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
-
 
 import authRoutes from "./routes/auth";
 import { authMiddleware } from "./middleware/authMiddleware";
 import User from "./models/Users"; // Import User model
 
 const app = express();
-app.use(cookieParser());
+
 // Use CORS middleware with proper configuration
 app.use(cors({
   origin: "https://blog-three-kappa-10.vercel.app", // exact match, no trailing slash
