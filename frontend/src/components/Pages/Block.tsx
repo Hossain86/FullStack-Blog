@@ -44,7 +44,7 @@ function Block({ blogs }: Props) {
 
   return (
     <div className="block">
-      {blogs.slice().reverse().map((article) => (
+      {blogs.map((article) => (
         <div key={article.id} className="block-container">
           <div className="block-image">
             <img src={article.imgsrc} alt={article.heading} className="block-img"  onClick={() => navigate(`/blog/${article.id}`)} />
