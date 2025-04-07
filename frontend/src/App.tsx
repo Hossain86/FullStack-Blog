@@ -15,16 +15,19 @@ import { AuthProvider } from "./components/LandingPage/AuthContext";
 const App: React.FC = () => {
   const [blogs, setBlogs] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true); // <-- loading state
 
   useEffect(() => {
     fetchData()
-      .then((data) => setBlogs(data))
-      .catch((err) => setError(err.message));
+      .then((data) => {
+        setBlogs(data);
+        setLoading(false); // ✅ stop loading after fetch
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
   }, []);
-
-  if (error) {
-    return <h1>Error: {error}</h1>;
-  }
 
   const [selectedCategory, setSelectedCategory] = useState<string>("");
 
@@ -32,16 +35,20 @@ const App: React.FC = () => {
     ? blogs.filter((article) => article.category === selectedCategory)
     : blogs;
 
+  if (error) return <h1>Error: {error}</h1>;
+
   return (
     <AuthProvider>
       <Router>
         <div className="app-container">
-          {/* Navbar is always visible */}
           <NavbarPage setCategory={setSelectedCategory} />
 
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/blogs" element={<Block blogs={filteredArticles} />} />
+            <Route
+              path="/blogs"
+              element={<Block blogs={filteredArticles} loading={loading} />} // ✅ pass loading
+            />
             <Route path="/blog/:id" element={<BlogDetails blogs={blogs} />} />
             <Route path="/create" element={<CreateBlog />} />
             <Route path="/login" element={<Login />} />
@@ -53,5 +60,6 @@ const App: React.FC = () => {
     </AuthProvider>
   );
 };
+
 
 export default App;

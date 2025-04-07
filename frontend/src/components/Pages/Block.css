@@ -75,6 +75,12 @@
   cursor: pointer;
   transition: border-color 0.25s;
 }
+.loading-container {
+  text-align: center;
+  padding: 100px;
+  font-size: 1.5rem;
+  color: #333;
+}
 
 @media (max-width: 700px) {
   .block-container {
@@ -137,8 +143,5 @@
   .block-lower{
     padding-right: 8px;
     padding-left: 8px;
-  }
-  .block-date{
-    display: none;
   }
 }

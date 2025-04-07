@@ -16,16 +16,17 @@ interface ArticleData {
 // Define props interface
 interface Props {
   blogs: ArticleData[];
+  loading: boolean; // <-- new prop
 }
 
-function Block({ blogs }: Props) {
-  const navigate = useNavigate();
 
+function Block({ blogs, loading }: Props) {
+  const navigate = useNavigate();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Manage likes in a state object
   const [likedArticles, setLikedArticles] = useState<{ [key: number]: boolean }>(() => {
     const storedLikes: { [key: number]: boolean } = {};
     blogs.forEach((article) => {
@@ -42,31 +43,60 @@ function Block({ blogs }: Props) {
     });
   };
 
+  // ✅ Show loading while waiting for blogs
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <h2>⏳ Loading blogs...</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="block">
       {blogs.map((article) => (
         <div key={article.id} className="block-container">
           <div className="block-image">
-            <img src={article.imgsrc} alt={article.heading} className="block-img"  onClick={() => navigate(`/blog/${article.id}`)} />
+            <img
+              src={article.imgsrc}
+              alt={article.heading}
+              className="block-img"
+              onClick={() => navigate(`/blog/${article.id}`)}
+            />
           </div>
           <div className="block-texts">
-            <h2 className="block-header" onClick={() => navigate(`/blog/${article.id}`)}>{article.heading}</h2>
-            <p className="block-details">  {article.details.substring(0, 150) + "..."}</p>
-            {/* <div className="cat-dat" > </div>
-              <p><strong>Category:</strong> {article.category}</p> */}
-              <p className="block-date"><strong>Date:</strong> {article.date_created}</p>
-            
-            <p className="block-author"><strong>Author:</strong> {article.author}</p>
-
-            
-            
+            <h2
+              className="block-header"
+              onClick={() => navigate(`/blog/${article.id}`)}
+            >
+              {article.heading}
+            </h2>
+            <p className="block-details">
+              {article.details.substring(0, 150) + "..."}
+            </p>
+            <p className="block-date">
+              <strong>Date Created:</strong> {article.date_created.split("T")[0]}
+            </p>
+            <p className="block-author">
+              <strong>Author:</strong> {article.author}
+            </p>
 
             <div className="block-lower">
-              <button className="ctaButton" onClick={() => navigate(`/blog/${article.id}`)}>
-              Show More
-            </button>
-              <span onClick={() => toggleLike(article.id)} style={{ cursor: "pointer" }}>
-                {likedArticles[article.id] ? <AiFillHeart color="red" size={22} /> : <AiOutlineHeart size={22} />}
+              <button
+                className="ctaButton"
+                onClick={() => navigate(`/blog/${article.id}`)}
+              >
+                Show More
+              </button>
+              <span
+                onClick={() => toggleLike(article.id)}
+                style={{ cursor: "pointer" }}
+              >
+                {likedArticles[article.id] ? (
+                  <AiFillHeart color="red" size={22} />
+                ) : (
+                  <AiOutlineHeart size={22} />
+                )}
               </span>
             </div>
           </div>
