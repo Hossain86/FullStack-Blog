@@ -6,7 +6,7 @@ export const fetchData = async () => {
     try{
       const response = await axios.get(`${API_URL}/api/posts`);
       const data = await response.data;
-      console.log("Fronend Data: ",data);
+      console.log("Frontend Data: ",data);
       return data;
     }
     catch(err){
